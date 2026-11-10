@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>نجمات تحدي نافس</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+    :root{color-scheme:dark;--bg1:#0b1033;--bg2:#2a1456;--text:#fff7e0;--muted:#c9c3e6;--gold:#ffd34e;--card:#1a1647;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+    *{box-sizing:border-box}
+    html,body{margin:0}
+    body{font-family:'Tajawal',Tahoma,Arial,sans-serif;color:var(--text);min-height:100vh;background:radial-gradient(ellipse at top,var(--bg2),var(--bg1) 70%) fixed;text-align:center;padding:24px 14px 60px;overflow-x:hidden}
+    .bg i{position:fixed;width:3px;height:3px;border-radius:50%;background:#fff;opacity:.6;animation:tw 3s infinite alternate}
+    @keyframes tw{to{opacity:.1;transform:scale(.5)}}
+    h1{font-size:clamp(2.2rem,8vw,3.8rem);margin:18px 0 6px;color:var(--gold);text-shadow:0 0 24px rgba(255,211,78,.5)}
+    .welcome{font-size:1.25rem;font-weight:700;margin:6px 0}
+    .sub{color:var(--muted);max-width:480px;margin:6px auto 22px;line-height:1.8}
+    .hint{color:var(--gold);font-size:.95rem;margin-bottom:18px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:18px 10px;max-width:760px;margin:0 auto}
+    .star{background:none;border:0;color:inherit;font:inherit;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px}
+    .star .t{font-size:.85rem;color:var(--muted);font-weight:700}
+    .star .n{font-size:1.1rem;font-weight:800}
+    .star svg{width:84px;height:84px;filter:drop-shadow(0 0 10px var(--c));animation:fl 3.5s ease-in-out infinite alternate;transition:transform .25s}
+    .star:hover svg,.star:focus-visible svg{transform:scale(1.18) rotate(12deg)}
+    .star.seen svg{opacity:.55}
+    @keyframes fl{to{transform:translateY(-8px)}}
+    .modal{position:fixed;inset:0;background:rgba(5,5,25,.8);display:none;align-items:center;justify-content:center;padding:18px;z-index:5}
+    .modal.on{display:flex}
+    .card{background:linear-gradient(160deg,var(--card),#33196b);border:2px solid var(--c);border-radius:24px;padding:26px 22px;max-width:440px;width:100%;box-shadow:0 0 40px var(--c);animation:pop .4s ease}
+    @keyframes pop{from{transform:scale(.6);opacity:0}}
+    .card svg{width:70px;height:70px;filter:drop-shadow(0 0 12px var(--c))}
+    .card .t{color:var(--c);font-weight:800;font-size:1.15rem;margin-top:4px}
+    .card h2{margin:4px 0 12px;font-size:1.8rem}
+    .card p{line-height:2;font-size:1.1rem;margin:0 0 18px}
+    button.b{background:var(--gold);color:#2a1456;border:0;border-radius:99px;padding:10px 26px;font:inherit;font-weight:800;cursor:pointer}
+    .edit{position:fixed;bottom:calc(14px + env(safe-area-inset-bottom,0px));left:14px;background:var(--card);color:var(--text);border:1px solid var(--muted);border-radius:99px;padding:8px 14px;font:inherit;cursor:pointer;z-index:4}
+    textarea{width:100%;height:180px;border-radius:12px;border:1px solid var(--muted);background:#0e0b2e;color:var(--text);font:inherit;padding:10px;margin:8px 0}
+    .small{font-size:.85rem;color:var(--muted);line-height:1.7;margin:0}
+    .card{max-height:92vh;overflow:auto}.card p{font-size:1.05rem;line-height:2;margin:0 0 10px}.card p.sig{color:var(--gold);font-weight:800;margin:14px 0 18px}
+    .body>.welcome,body>.welcome,body>.sub{display:none}
+    .logo{width:170px;height:76px;display:block;margin:0 auto}
+    #welcome{position:fixed;inset:0;z-index:8;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;overflow:auto;background:radial-gradient(ellipse at top,var(--bg2),var(--bg1) 70%);transition:opacity .7s}
+    #welcome.hide{opacity:0;pointer-events:none}
+    #welcome .logo{width:min(70vw,280px);height:auto;animation:fl 3.5s ease-in-out infinite alternate}
+    .w-title{font-size:clamp(2.4rem,10vw,4.2rem);font-weight:800;color:var(--gold);margin:14px 0 6px;text-shadow:0 0 28px rgba(255,211,78,.55)}
+    .w-hi{font-size:1.4rem;font-weight:800;margin:6px 0}
+    .w-sub{color:var(--muted);max-width:420px;line-height:2;margin:6px 0 26px;font-size:1.1rem}
+    #start{font-size:1.15rem;padding:13px 34px;animation:pulse 1.8s infinite}
+    @keyframes pulse{50%{box-shadow:0 0 0 12px rgba(255,211,78,.15)}}
+    img.logo{height:auto;width:min(52vw,220px);background:#fff;border-radius:28px;padding:10px;margin:0 auto;display:block;box-shadow:0 0 30px rgba(255,255,255,.25)}
+    #welcome img.logo{width:min(66vw,280px)}
+    .view{display:none;max-width:760px;margin:0 auto}.view.on{display:block;animation:pop .4s}
+    .menu{display:grid;gap:14px;max-width:420px;margin:0 auto}
+    .mc{background:linear-gradient(160deg,var(--card),#33196b);color:var(--text);border:2px solid var(--gold);border-radius:22px;padding:18px;font:inherit;cursor:pointer;display:flex;align-items:center;gap:16px;font-size:1.25rem;box-shadow:0 0 18px rgba(255,211,78,.25);transition:transform .2s}
+    .mc:hover,.mc:active{transform:scale(1.04)}
+    .mc .ic{font-size:2.4rem}
+    .back{background:none;border:1px solid var(--muted);color:var(--text);border-radius:99px;padding:6px 16px;font:inherit;cursor:pointer;float:right}
+    .panel{background:linear-gradient(160deg,var(--card),#33196b);border:2px solid var(--gold);border-radius:24px;padding:24px 20px;max-width:460px;margin:18px auto;box-shadow:0 0 30px rgba(255,211,78,.3);line-height:2;font-size:1.1rem}
+    .trophy{font-size:4.5rem;animation:fl 2s ease-in-out infinite alternate}
+    .panel .sig{color:var(--gold);font-weight:800;margin:14px 0 0}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:12px 0}
+    .chips span{background:rgba(255,211,78,.15);border:1px solid var(--gold);border-radius:99px;padding:3px 14px;font-weight:700}
+    .top-name{font-size:2.4rem;font-weight:800;color:var(--gold);text-shadow:0 0 20px rgba(255,211,78,.6);margin:6px 0}
+    input.f{width:100%;border-radius:12px;border:1px solid var(--muted);background:#0e0b2e;color:var(--text);font:inherit;padding:8px;margin:4px 0}
+    .spark{position:fixed;pointer-events:none;font-size:22px;z-index:9;animation:up 1.4s forwards}
+    @keyframes up{to{transform:translateY(-220px) rotate(200deg);opacity:0}}
+    </style>
+    </head>
+    <body>
+        <div class="bg" id="bg"></div>
+        <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff3b0"/><stop offset="1" stop-color="#ffb52e"/></linearGradient><symbol id="logo" viewBox="0 0 200 90"><circle cx="150" cy="45" r="38" fill="none" stroke="url(#lg)" stroke-width="3"/><path transform="translate(124 19) scale(2.2)" fill="url(#lg)" stroke="#fff7e0" stroke-width=".5" stroke-linejoin="round" d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17l-6.1 3.4 1.5-6.8L2.2 9l6.9-.7z"/><text x="62" y="62" text-anchor="middle" font-family="Tajawal,Tahoma,Arial,sans-serif" font-weight="800" font-size="50" fill="url(#lg)">نافس</text></symbol></defs></svg>
+        <div id="welcome">
+            <!-- ضعي صورتك هنا عند الحاجة: <img src="اسم-الصورة.png" alt="وصف الصورة"> -->
+             <div class="w-title">نجمات نافس</div>
+             <p class="w-hi">أهلًا بكنّ في عالم نجماتنا المتألقات 🌟</p>
+             <p class="w-sub">هنا نحتفي بكنّ، فأنتنّ من أضأتنّ تحدي نافس في العلوم بجدّكنّ وإصراركنّ وحبّكنّ للتعلّم ✨</p>
+             <button class="b" id="start">ابدئي الرحلة ✨</button>
+            </div>
+            <div class="view on" id="menu">
+  <!-- ضعي صورتك هنا عند الحاجة: <img src="اسم-الصورة.png" alt="وصف الصورة"> -->
+  <h1>تحدي نافس</h1>
+  <p class="hint">في مادة العلوم 🔬 اختاري أيقونة لتبدأ المفاجآت</p>
+  <div class="menu">
+    <button class="mc" data-go="v-stars"><span class="ic">⭐</span><b>نجمات تحدي نافس</b></button>
+    <button class="mc" data-go="v-top"><span class="ic">🥇</span><b>الطالبة المتصدرة</b></button>
+    <button class="mc" data-go="v-thanks"><span class="ic">💌</span><b>شكر للمشاركات</b></button>
+  </div>
+</div>
+<div class="view" id="v-stars">
+  <button class="back" data-go="menu">→ رجوع</button>
+  <h1>✨ نجمات نافس ✨</h1>
+  <p class="hint">اضغطي على نجمتكِ لتكتشفي رسالتكِ</p>
+  <div class="grid" id="grid"></div>
+</div>
+<div class="view" id="v-top">
+  <button class="back" data-go="menu">→ رجوع</button>
+  <h1>🥇 صاحبة أعلى نقاط</h1>
+  <p class="sub">في تحدي نافس لمادة العلوم</p>
+  <div class="panel" id="topPanel">
+    <div class="trophy">🥇</div>
+    <p>من تكون الطالبة التي حصدت أعلى النقاط؟</p>
+    <button class="b" id="reveal">اكشفي الاسم ✨</button>
+    <div id="topRes" style="display:none"></div>
+  </div>
+</div>
+<div class="view" id="v-thanks">
+  <button class="back" data-go="menu">→ رجوع</button>
+  <h1>💌 شكرًا لكنّ</h1>
+  <div class="panel">
+    <p>شكرًا لكل طالبة شاركت في تحدي نافس في مادة العلوم. مشاركتكنّ هي سر نجاح التحدي، وكل محاولة منكنّ كانت خطوة نحو التميز والتفوق.</p>
+    <div class="chips" id="chips"></div>
+    <p class="sig">معلمتكِ: وجدان السهلي</p>
+  </div>
+</div>
+
+<div class="modal" id="modal"><div class="card" id="card" style="text-align:center"></div></div>
+<div class="modal" id="emodal"><div class="card" style="--c:#ffd34e">
+  <h2 style="font-size:1.4rem">تعديل الأسماء</h2>
+  <p class="small">اكتبي اسمًا في كل سطر. تتوزع الألقاب تلقائيًا. ولتحديد لقب معيّن: «الاسم - الإصرار».</p>
+  <textarea id="names"></textarea>
+  <p class="small">الطالبة المتصدرة:</p>
+  <input class="f" id="tn" placeholder="اسم الطالبة">
+  <input class="f" id="tp" placeholder="عدد النقاط" inputmode="numeric">
+  <button class="b" id="save">حفظ</button>
+</div></div>
+<button class="edit" id="editBtn">✏️ الأسماء</button>
+
+<script>
+const TITLES=[
+ {t:'نجمة الاستمرارية',c:'#4ee3c1',m:'يا {n}، استمراركِ كان أجمل ما رأيناه في التحدي. خطوة بعد خطوة، يومًا بعد يوم، أثبتِّ أن النجاح يصنعه من لا تتوقف. فخورة بكِ جدًا، وأنتِ تستحقين كل التقدير والشكر 💛'},
+ {t:'نجمة التميز',c:'#ffd34e',m:'يا {n}، بصمتكِ في التحدي كانت مختلفة ومضيئة. تميّزكِ لم يكن صدفة، بل ثمرة جهد وذكاء وروح جميلة. شكرًا لأنكِ جعلتِ فصلنا أكثر لمعانًا ✨'},
+ {t:'نجمة التفوق',c:'#ff8fb8',m:'يا {n}، تفوقكِ رفع الرأس وأسعد القلب. كنتِ مثالًا في الجد والطموح، ونرى فيكِ مستقبلًا مشرقًا بإذن الله. شكرًا لكِ وبارك الله في علمكِ 🌸'},
+ {t:'نجمة الإصرار',c:'#8ec5ff',m:'يا {n}، إصراركِ علّمنا أن الصعب يصير سهلًا حين نؤمن به. لم تستسلمي، وهذا أجمل أنواع الانتصار. شكرًا لقوتكِ وعزيمتكِ، وأنتِ نجمة مهما كانت النتيجة 💙'}
+];
+const MSG1='تقديرًا لتميزكِ والتزامكِ بالمشاركة في تحدي نافس، وحرصكِ على تطوير مهاراتكِ والاستعداد المستمر، بعد مشاركتكِ الفاعلة في التحديات الأسبوعية لمدة شهر.';
+const MSG2='نفخر بكِ وبإصراركِ، ونتمنى لكِ مزيدًا من النجاح والتفوق.';
+const DEFAULT=['نورة','سارة','ريم','لينا','هدى','مها','جود','أريج'];
+let list=DEFAULT.join('\n');
+try{list=localStorage.getItem('nafes-names')||list}catch(e){}
+
+const $=id=>document.getElementById(id);
+const star=c=>`<svg viewBox="0 0 24 24"><path fill="${c}" stroke="#fff7e0" stroke-width=".6" stroke-linejoin="round" d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17l-6.1 3.4 1.5-6.8L2.2 9l6.9-.7z"/></svg>`;
+
+function parse(){
+  return list.split('\n').map(s=>s.trim()).filter(Boolean).map((line,i)=>{
+    const [n,tt]=line.split(/\s*-\s*/);
+    let idx=i%TITLES.length;
+    if(tt){const f=TITLES.findIndex(x=>x.t.includes(tt.trim()));if(f>-1)idx=f}
+    return {n:n.trim(),k:TITLES[idx]};
+  });
+}
+function render(){
+  const g=$('grid');g.innerHTML='';
+  parse().forEach(s=>{
+    const b=document.createElement('button');
+    b.className='star';b.style.setProperty('--c',s.k.c);
+    b.innerHTML=`<span class="t">${s.k.t}</span>${star(s.k.c)}<span class="n">${s.n}</span>`;
+    b.onclick=e=>open(s,b,e);
+    g.appendChild(b);
+  });
+}
+function open(s,b,e){
+  b.classList.add('seen');
+  const c=$('card');c.style.setProperty('--c',s.k.c);
+  c.innerHTML=`${star(s.k.c)}<div class="t">${s.k.t}</div><h2>${s.n}</h2><p>${MSG1}</p><p>${MSG2}</p><p class="sig">معلمتكِ: وجدان السهلي</p><button class="b" id="x">شكرًا 💖</button>`;
+  $('modal').classList.add('on');
+  $('x').onclick=()=>$('modal').classList.remove('on');
+  for(let i=0;i<14;i++){
+    const d=document.createElement('div');d.className='spark';d.textContent=['✨','⭐','💛','🌟'][i%4];
+    d.style.left=(e.clientX+(Math.random()*160-80))+'px';d.style.top=(e.clientY+(Math.random()*40-20))+'px';
+    document.body.appendChild(d);setTimeout(()=>d.remove(),1400);
+  }
+}
+$('modal').onclick=e=>{if(e.target.id==='modal')$('modal').classList.remove('on')};
+$('emodal').onclick=e=>{if(e.target.id==='emodal')$('emodal').classList.remove('on')};
+
+
+
+$('start').onclick=()=>{const w=$('welcome');w.classList.add('hide');setTimeout(()=>w.style.display='none',700)};
+let champ={n:'اسم الطالبة',p:''};
+try{champ=JSON.parse(localStorage.getItem('nafes-top'))||champ}catch(e){}
+$('editBtn').onclick=()=>{$('names').value=list;$('tn').value=champ.n==='اسم الطالبة'?'':champ.n;$('tp').value=champ.p;$('emodal').classList.add('on')};
+$('save').onclick=()=>{list=$('names').value;champ={n:$('tn').value.trim()||'اسم الطالبة',p:$('tp').value.trim()};try{localStorage.setItem('nafes-names',list);localStorage.setItem('nafes-top',JSON.stringify(champ))}catch(e){}render();fill();$('emodal').classList.remove('on')};
+function fill(){
+  $('chips').innerHTML=parse().map(s=>'<span>'+s.n+'</span>').join('');
+  $('topRes').innerHTML='<div class="top-name">'+champ.n+'</div>'+(champ.p?'<p style="margin:0">⭐ '+champ.p+' نقطة</p>':'')+'<p style="margin:8px 0 0">مبروك! نفخر بكِ وبتميزكِ في تحدي نافس 🎉</p>';
+}
+function go(id){document.querySelectorAll('.view').forEach(v=>v.classList.toggle('on',v.id===id));window.scrollTo(0,0)}
+document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go));
+$('reveal').onclick=e=>{$('reveal').style.display='none';$('topRes').style.display='block';
+  for(let i=0;i<24;i++){const d=document.createElement('div');d.className='spark';d.textContent=['🎉','✨','⭐','🥇'][i%4];d.style.left=(e.clientX+(Math.random()*240-120))+'px';d.style.top=(e.clientY+(Math.random()*40-20))+'px';document.body.appendChild(d);setTimeout(()=>d.remove(),1400)}};
+fill();
+const bg=$('bg');
+for(let i=0;i<50;i++){const s=document.createElement('i');s.style.left=Math.random()*100+'%';s.style.top=Math.random()*100+'%';s.style.animationDelay=Math.random()*3+'s';bg.appendChild(s)}
+render();
+</script>
+</body>
+</html>
